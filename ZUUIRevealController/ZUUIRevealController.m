@@ -750,15 +750,6 @@
 	[self _addFrontViewControllerToHierarchy:self.frontViewController];	
 }
 
-- (void)viewDidUnload
-{
-	[self _removeViewControllerFromHierarchy:self.frontViewController];
-	[self _removeViewControllerFromHierarchy:self.rearViewController];
-	
-	self.frontView = nil;
-	self.rearView = nil;
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
 	return (toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
@@ -776,6 +767,9 @@
 #else
 - (void)dealloc
 {
+	[self _removeViewControllerFromHierarchy:self.frontViewController];
+	[self _removeViewControllerFromHierarchy:self.rearViewController];
+
 	[_frontViewController release], _frontViewController = nil;
 	[_rearViewController release], _rearViewController = nil;
 	[_frontView release], _frontView = nil;
