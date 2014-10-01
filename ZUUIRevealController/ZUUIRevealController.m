@@ -594,6 +594,23 @@
 	}
 }
 
+- (void)setRearViewController:(UIViewController *)rearViewController {
+  [self.rearViewController viewWillDisappear:NO];
+  [self _removeViewControllerFromHierarchy:self.rearViewController];
+  [self.rearViewController viewDidDisappear:NO];
+  #if __has_feature(objc_arc)
+		_rearViewController = rearViewController;
+  #else
+		[rearViewController retain];
+		[_rearViewController release];
+		_rearViewController = rearViewController;
+  #endif
+		
+  [rearViewController viewWillAppear:NO];
+  [self _addRearViewControllerToHierarchy:rearViewController];
+  [rearViewController viewDidAppear:NO];
+}
+
 #pragma mark - UIViewController Containment
 
 - (void)_addFrontViewControllerToHierarchy:(UIViewController *)frontViewController
