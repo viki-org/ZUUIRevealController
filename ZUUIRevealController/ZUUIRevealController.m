@@ -773,7 +773,7 @@
 }
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED > __IPHONE_5_1
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
 #endif
